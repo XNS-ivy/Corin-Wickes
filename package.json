@@ -1,10 +1,11 @@
 {
-  "name": "takanashi-hoshino",
+  "name": "Corin-Wickes",
   "version": "1.0.0",
   "description": "Whatsapp Bot ESM style",
   "main": "index.js",
   "scripts": {
-    "test": "node test"
+    "test": "node test",
+    "start": "node index"
   },
   "type": "module",
   "author": "XNS-ivy",

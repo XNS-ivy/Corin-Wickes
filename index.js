@@ -1,5 +1,5 @@
-import { hoshinoSocket } from './libs/whatsapp.js'
+import { corinSocket } from './libs/whatsapp.js'
 
-hoshinoSocket().catch(err => console.error(err))
+corinSocket().catch(err => console.error(err))
 
 process.on('uncaughtException', process.exit)
