@@ -1,2 +1,2 @@
-# Takanashi-Hoshino
+# Corin Wickes
 Whatsapp Bot ESM style

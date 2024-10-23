@@ -25,7 +25,7 @@ async function corinSocket() {
         }
     })
     corin.ev.on('messages.upsert', async m => {
-        if (m.messages[0].pushName == undefined) return
+        if (m.messages[0].pushName == undefined || !m.messages[0]) return
         const msg = fetchMsg(m.messages[0])
         loggingMessage(msg)
     })

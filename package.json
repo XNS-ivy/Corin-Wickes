@@ -1,18 +1,18 @@
 {
-  "name": "Corin-Wickes",
+  "name": "corin-wickes",
   "version": "1.0.0",
   "description": "Whatsapp Bot ESM style",
   "main": "index.js",
   "scripts": {
-    "test": "node test",
-    "start": "node index"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "type": "module",
   "author": "XNS-ivy",
   "license": "MIT",
   "dependencies": {
-    "@whiskeysockets/baileys": "^6.7.8",
+    "@whiskeysockets/baileys": "^6.7.9",
     "axios": "^1.7.7",
+    "jimp": "^0.16.13",
     "qrcode-terminal": "^0.12.0"
   }
 }

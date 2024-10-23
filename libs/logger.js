@@ -12,8 +12,7 @@ function fetchMsg(m) {
     const expirationMessage = msgObject == 'converation' ? msg.conversation.contextInfo.expiration :
         msgObject == 'extendedTextMessage' ? msg.extendedTextMessage.contextInfo.expiration :
             msgObject == 'imageMessage' ? msg.imageMessage.contextInfo.expiration :
-                msgObject == 'stickerMessage' ? msg.stickerMessage.contextInfo.expiration :
-                    msgObject == 'videoMessage' ? msg.videoMessage.contextInfo.expiration : 0
+                msgObject == 'videoMessage' ? msg.videoMessage.contextInfo.expiration : 0
     const media = msgObject == 'extendedTextMessage' || msgObject == 'conversation' ? 'Text' :
         msgObject == 'imageMessage' ? 'Image' :
             msgObject == 'videoMessage' ? 'Video' :
@@ -43,8 +42,22 @@ function fetchMsg(m) {
 }
 
 function loggingMessage(m) {
-    console.log(m)
+    const msg = [
+        `ID \t\t: ${m.msg.id}`,
+        `NUMBER \t\t: ${m.msg.number}`,
+        `NAME \t\t: ${m.msg.name}`,
+        `MESSAGE \t: ${m.msg.text}`,
+        `TYPE \t\t: ${m.msg.mediaType}`,
+        `EXPIRATION \t: ${m.msg.expiration}\n`,
+    ];
+
+    // console.log(msg);
+
+    for (let i = 0; i < msg.length; i++) {
+        console.log(msg[i]);
+    }
 }
+
 
 export {
     fetchMsg,
