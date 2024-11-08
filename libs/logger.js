@@ -43,12 +43,14 @@ function fetchMsg(m) {
 
 function loggingMessage(m) {
     const msg = [
+        `+ -------------`,
         `ID \t\t: ${m.msg.id}`,
         `NUMBER \t\t: ${m.msg.number}`,
         `NAME \t\t: ${m.msg.name}`,
         `MESSAGE \t: ${m.msg.text}`,
         `TYPE \t\t: ${m.msg.mediaType}`,
-        `EXPIRATION \t: ${m.msg.expiration}\n`,
+        `EXPIRATION \t: ${m.msg.expiration}`,
+        `+ -------------\n`,
     ];
 
     // console.log(msg);
