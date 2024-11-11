@@ -1,5 +1,7 @@
 function fetchMsg(m) {
     const msg = m.message
+    const isobjt = Object.keys(msg)[0] == null ? false : true
+    if (isobjt == false) return
     // console.log(msg)
     // console.log(m)
     const fetchNumber = m.key.participant == undefined ? m.key.remoteJid.split('@')[0] : m.key.participant.split('@')[0]
@@ -12,7 +14,8 @@ function fetchMsg(m) {
     const expirationMessage = msgObject == 'converation' ? msg.conversation.contextInfo.expiration :
         msgObject == 'extendedTextMessage' ? msg.extendedTextMessage.contextInfo.expiration :
             msgObject == 'imageMessage' ? msg.imageMessage.contextInfo.expiration :
-                msgObject == 'videoMessage' ? msg.videoMessage.contextInfo.expiration : 0
+                msgObject == 'videoMessage' ? msg.videoMessage.contextInfo.expiration :
+                    msgObject == 'stickerMessage' ? msg.stickerMessage.contextInfo.expiration : 0
     const media = msgObject == 'extendedTextMessage' || msgObject == 'conversation' ? 'Text' :
         msgObject == 'imageMessage' ? 'Image' :
             msgObject == 'videoMessage' ? 'Video' :
@@ -42,22 +45,14 @@ function fetchMsg(m) {
 }
 
 function loggingMessage(m) {
-    const msg = [
-        `+ -------------`,
-        `ID \t\t: ${m.msg.id}`,
-        `NUMBER \t\t: ${m.msg.number}`,
-        `NAME \t\t: ${m.msg.name}`,
-        `MESSAGE \t: ${m.msg.text}`,
-        `TYPE \t\t: ${m.msg.mediaType}`,
-        `EXPIRATION \t: ${m.msg.expiration}`,
-        `+ -------------\n`,
-    ];
-
-    // console.log(msg);
-
-    for (let i = 0; i < msg.length; i++) {
-        console.log(msg[i]);
-    }
+    console.log(`+ -------------\n`,
+        `ID \t\t: ${m.msg.id}\n`,
+        `NUMBER \t: ${m.msg.number}\n`,
+        `NAME \t\t: ${m.msg.name}\n`,
+        `MESSAGE \t: ${m.msg.text}\n`,
+        `TYPE \t\t: ${m.msg.mediaType}\n`,
+        `EXPIRATION \t: ${m.msg.expiration}\n`,
+        `+ -------------\n`)
 }
 
 
