@@ -1,7 +1,5 @@
 function fetchMsg(m) {
     const msg = m.message
-    const isobjt = Object.keys(msg)[0] == null ? false : true
-    if (isobjt == false) return
     // console.log(msg)
     // console.log(m)
     const fetchNumber = m.key.participant == undefined ? m.key.remoteJid.split('@')[0] : m.key.participant.split('@')[0]

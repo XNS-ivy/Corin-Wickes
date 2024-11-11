@@ -41,10 +41,10 @@ async function corinSocket() {
     });
 
     corin.ev.on('messages.upsert', async m => {
-        if (m.messages[0].pushName == undefined || !m.messages[0]) return;
-        const msg = fetchMsg(m.messages[0]);
-        loggingMessage(msg);
-    });
+        if (m.messages[0].pushName == undefined || !m.messages[0] || !Object.keys(m.messages[0])) return
+        const msg = fetchMsg(m.messages[0])
+        loggingMessage(msg)
+    })
 }
 
 export { corinSocket };
