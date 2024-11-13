@@ -53,7 +53,6 @@ function loggingMessage(m) {
         `+ -------------\n`)
 }
 
-
 export {
     fetchMsg,
     loggingMessage
