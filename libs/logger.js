@@ -53,7 +53,13 @@ function loggingMessage(m) {
         `+ -------------\n`)
 }
 
+async function initialQuery(msg) {
+    const stringify = String(msg)
+    const isHitPrefix = stringify.startsWith(global.core.prefix) ? [true,msg.split(global.core.prefix)[1]] : false
+}
+
 export {
     fetchMsg,
-    loggingMessage
+    loggingMessage,
+    initialQuery,
 }
