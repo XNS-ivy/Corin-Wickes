@@ -55,7 +55,22 @@ function loggingMessage(m) {
 
 async function initialQuery(msg) {
     const stringify = String(msg)
-    const isHitPrefix = stringify.startsWith(global.core.prefix) ? [true,msg.split(global.core.prefix)[1]] : false
+    const isHitPrefix = stringify.startsWith(global.core.prefix) ? stringify.split(global.core.prefix)[1] : null
+
+    const [command, ...args] = isHitPrefix ? isHitPrefix.split(/\s+/) : [null]
+    const argument = args.length > 0 && args[0] !== '' ? args.join(' ') : null
+
+    const definitionQuery = global.core.command.regular.includes(command) ? 'regular' :
+        global.core.command.premium.includes(command) ? 'premium' :
+            global.core.command.adminGroup.includes(command) ? 'admin' :
+                global.core.command.owner.includes(command) ? 'owner' :
+                    `No query found! Try to ${global.core.prefix}${global.core.command.regular[0]}`
+
+    return isHitPrefix ? {
+        query: command,
+        args: argument,
+        menu: definitionQuery,
+    } : false
 }
 
 export {

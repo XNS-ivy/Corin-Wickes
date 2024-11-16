@@ -41,11 +41,11 @@ async function corinSocket() {
     })
 
     corin.ev.on('messages.upsert', async m => {
-        if (m.messages[0].pushName == undefined || !m.messages[0] || !Object.keys(m.messages[0].message)[0]) return 
+        if (!m.messages[0] || m.messages[0].pushName === undefined || !m.messages[0].message || !Object.keys(m.messages[0].message).length) return
         const msg = fetchMsg(m.messages[0])
         loggingMessage(msg)
         const query = await initialQuery(msg.msg.text)
-        query
+        console.log(query)
     })
 }
 
