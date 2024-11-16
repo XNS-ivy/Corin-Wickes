@@ -43,14 +43,20 @@ function fetchMsg(m) {
 }
 
 function loggingMessage(m) {
-    console.log(`+ -------------\n`,
-        `ID \t\t: ${m.msg.id}\n`,
-        `NUMBER \t: ${m.msg.number}\n`,
-        `NAME \t\t: ${m.msg.name}\n`,
-        `MESSAGE \t: ${m.msg.text}\n`,
-        `TYPE \t\t: ${m.msg.mediaType}\n`,
-        `EXPIRATION \t: ${m.msg.expiration}\n`,
-        `+ -------------\n`)
+    const log = `+ -------------\n`+
+        `ID \t\t: ${m.msg.id}\n`+
+        `NUMBER \t\t: ${m.msg.number}\n`+
+        `NAME \t\t: ${m.msg.name}\n`+
+        `MESSAGE \t: ${m.msg.text}\n`+
+        `TYPE \t\t: ${m.msg.mediaType}\n`+
+        `EXPIRATION \t: ${m.msg.expiration}\n`+
+        `+ -------------\n`
+        return log
+}
+
+function loggingQuery(m) {
+    const log = m
+    return log
 }
 
 async function initialQuery(msg) {
@@ -63,8 +69,7 @@ async function initialQuery(msg) {
     const definitionQuery = global.core.command.regular.includes(command) ? 'regular' :
         global.core.command.premium.includes(command) ? 'premium' :
             global.core.command.adminGroup.includes(command) ? 'admin' :
-                global.core.command.owner.includes(command) ? 'owner' :
-                    `No query found! Try to ${global.core.prefix}${global.core.command.regular[0]}`
+                global.core.command.owner.includes(command) ? 'owner' : null
 
     return isHitPrefix ? {
         query: command,
@@ -77,4 +82,5 @@ export {
     fetchMsg,
     loggingMessage,
     initialQuery,
+    loggingQuery
 }

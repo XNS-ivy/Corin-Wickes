@@ -1,6 +1,6 @@
 import { makeWASocket, DisconnectReason, useMultiFileAuthState } from '@whiskeysockets/baileys'
 import pino from 'pino'
-import { fetchMsg, loggingMessage, initialQuery } from './logger.js'
+import { fetchMsg, loggingMessage, initialQuery, loggingQuery } from './logger.js'
 import fs from 'fs/promises'
 
 async function corinSocket() {
@@ -43,9 +43,10 @@ async function corinSocket() {
     corin.ev.on('messages.upsert', async m => {
         if (!m.messages[0] || m.messages[0].pushName === undefined || !m.messages[0].message || !Object.keys(m.messages[0].message).length) return
         const msg = fetchMsg(m.messages[0])
-        loggingMessage(msg)
         const query = await initialQuery(msg.msg.text)
-        console.log(query)
+        const logging = query ? loggingQuery(query) : loggingMessage(msg)
+        console.log(logging)
+        
     })
 }
 
