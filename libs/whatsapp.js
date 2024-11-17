@@ -2,6 +2,7 @@ import { makeWASocket, DisconnectReason, useMultiFileAuthState } from '@whiskeys
 import pino from 'pino'
 import { fetchMsg, loggingMessage, initialQuery, loggingQuery } from './logger.js'
 import fs from 'fs/promises'
+import { menu } from './waMenu.js'
 
 async function corinSocket() {
     const { state, saveCreds } = await useMultiFileAuthState("./session")
@@ -42,11 +43,14 @@ async function corinSocket() {
 
     corin.ev.on('messages.upsert', async m => {
         if (!m.messages[0] || m.messages[0].pushName === undefined || !m.messages[0].message || !Object.keys(m.messages[0].message).length) return
-        const msg = fetchMsg(m.messages[0])
+        const msg = await fetchMsg(m.messages[0])
         const query = await initialQuery(msg.msg.text)
-        const logging = query ? loggingQuery(query) : loggingMessage(msg)
+        const logging = query ? await loggingQuery(query, msg) : await loggingMessage(msg)
         console.log(logging)
-        
+        if (query) {
+            const command = await menu(query, msg)
+            // console.log(command)
+        }
     })
 }
 

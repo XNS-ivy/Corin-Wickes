@@ -1,4 +1,4 @@
-function fetchMsg(m) {
+async function fetchMsg(m) {
     const msg = m.message
     // console.log(msg)
     // console.log(m)
@@ -42,20 +42,29 @@ function fetchMsg(m) {
     }
 }
 
-function loggingMessage(m) {
-    const log = `+ -------------\n`+
-        `ID \t\t: ${m.msg.id}\n`+
-        `NUMBER \t\t: ${m.msg.number}\n`+
-        `NAME \t\t: ${m.msg.name}\n`+
-        `MESSAGE \t: ${m.msg.text}\n`+
-        `TYPE \t\t: ${m.msg.mediaType}\n`+
-        `EXPIRATION \t: ${m.msg.expiration}\n`+
+async function loggingMessage(m) {
+    const log = `+ -------------\n` +
+        `ID \t\t: ${m.msg.id}\n` +
+        `NUMBER \t\t: ${m.msg.number}\n` +
+        `NAME \t\t: ${m.msg.name}\n` +
+        `MESSAGE \t: ${m.msg.text}\n` +
+        `TYPE \t\t: ${m.msg.mediaType}\n` +
+        `EXPIRATION \t: ${m.msg.expiration}\n` +
         `+ -------------\n`
-        return log
+
+    return log
 }
 
-function loggingQuery(m) {
-    const log = m
+async function loggingQuery(m, msg) {
+    const log = `+ -------------\n` +
+        `EMIT QUERY\n` +
+        `ID \t\t: ${msg.msg.id}\n` +
+        `NUMBER \t\t: ${msg.msg.number}\n` +
+        `QUERY \t\t: ${m.query}\n` +
+        `QUERY TYPE \t: ${m.menu}\n` +
+        `ARGUMENT \t: ${m.args}\n` +
+        `+ -------------\n`
+
     return log
 }
 
@@ -69,7 +78,7 @@ async function initialQuery(msg) {
     const definitionQuery = global.core.command.regular.includes(command) ? 'regular' :
         global.core.command.premium.includes(command) ? 'premium' :
             global.core.command.adminGroup.includes(command) ? 'admin' :
-                global.core.command.owner.includes(command) ? 'owner' : null
+                global.core.command.owner.includes(command) ? 'owner' : false
 
     return isHitPrefix ? {
         query: command,
