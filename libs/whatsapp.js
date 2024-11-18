@@ -48,7 +48,6 @@ async function corinSocket() {
         const query = await initialQuery(msg.msg.text)
         const logging = query ? await loggingQuery(query, msg) : await loggingMessage(msg)
 
-        // log it
         console.log(logging)
         if (query) {
             const command = await menu(query, msg)
