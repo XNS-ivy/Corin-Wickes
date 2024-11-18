@@ -42,16 +42,25 @@ async function corinSocket() {
     })
 
     corin.ev.on('messages.upsert', async m => {
-        if (!m.messages[0] || m.messages[0].pushName === undefined || !m.messages[0].message || !Object.keys(m.messages[0].message).length) return
-        const msg = await fetchMsg(m.messages[0])
+        if (!m.messages[0] || m.messages[0].pushName === undefined || !m.messages[0].message || !Object.keys(m.messages[0].message).length || m.messages[0].key.remoteJid === 'status@broadcast') return
+        const ms = m.messages[0]
+        const msg = await fetchMsg(ms)
         const query = await initialQuery(msg.msg.text)
         const logging = query ? await loggingQuery(query, msg) : await loggingMessage(msg)
+
+        // log it
         console.log(logging)
         if (query) {
             const command = await menu(query, msg)
-            // console.log(command)
+            command.payload == 'text' ? await sendTextMesage(command.text, msg.msg, ms) :
+                await sendTextMesage(`Command Not Found! try ${global.core.prefix}${global.core.command.regular[0]}`, msg.msg, ms)
         }
     })
+    async function sendTextMesage(text, msg, m) {
+        corin.sendMessage(msg.id, { text: text }, { quoted: m, ephemeralExpiration: msg.expiration }).catch((err) => {
+            console.error(err)
+        })
+    }
 }
 
 export { corinSocket };

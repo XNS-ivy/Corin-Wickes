@@ -9,17 +9,17 @@ async function menu(command, m) {
     switch (command.query) {
         case global.core.command.regular[0]:
             outputText = 'Hello!'
-            mediaUrl = "hhhhaudahsudias"
             text = true
-            break;
-    
+            break
+        
         default:
             text = false
             image = false
             audio = false
             video = false
-            break;
+            break
     }
+       
     const typeQuery = text ? 'text' : image ? 'image' : audio ? 'audio' : video ? 'video' : false
     return text ? {
         payload : typeQuery,
