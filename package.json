@@ -4,7 +4,8 @@
   "description": "Whatsapp Bot ESM style",
   "main": "index.js",
   "scripts": {
-    "start": "node index"
+    "start": "node index",
+    "test" : "node test"
   },
   "type": "module",
   "author": "XNS-ivy",
