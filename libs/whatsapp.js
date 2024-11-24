@@ -50,6 +50,10 @@ async function corinSocket() {
 
         console.log(logging)
         if (query) {
+            // const argument = query.args <-- this is argument
+            // const querymenu = query.query <-- this is a front query like "ping" or "help"
+            // const querytype = query.menu  <-- this is a query that is define is this command is a regular or permium member
+            
             const command = await menu(query, msg)
             command.payload == 'text' ? await sendTextMesage(command.text, msg.msg, ms) :
                 await sendTextMesage(`Command Not Found! try ${global.core.prefix}${global.core.command.regular[0]}`, msg.msg, ms)

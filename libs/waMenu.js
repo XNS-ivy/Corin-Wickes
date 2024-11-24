@@ -1,3 +1,5 @@
+import { wiki } from "./utility.js"
+
 async function menu(command, m) {
     let outputText = ''
     let mediaUrl = false
@@ -13,6 +15,10 @@ async function menu(command, m) {
             typeQuery = 'text'
             break
         case global.core.command.regular[2]:
+        case global.core.command.regular[3]:
+            outputText = await wiki(command.args, command.query)
+            typeQuery = 'text'
+            break
         default:
             outputText = 'Command not recognized.'
             typeQuery = 'text'
